@@ -9,15 +9,15 @@ public class Filename {
 		return new Filename(file.getName());
 	}
 
-	private Filename(String filename) {
-		this.filename = filename;
+	private Filename(String name) {
+		this.name = name;
 	}
 
-	private final String filename;
+	private final String name;
 
 	@Override
 	public String toString() {
-		return filename;
+		return name;
 	}
 
 	@Override
@@ -25,11 +25,11 @@ public class Filename {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Filename filename1 = (Filename) o;
-		return Objects.equals(filename, filename1.filename);
+		return Objects.equals(name, filename1.name);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(filename);
+		return Objects.hash(name);
 	}
 }
