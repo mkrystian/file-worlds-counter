@@ -1,5 +1,7 @@
 package pl.krystianmajewski.file.worlds.counter.rating.calculator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.krystianmajewski.file.worlds.counter.model.FileWordsContainer;
 import pl.krystianmajewski.file.worlds.counter.model.Rating;
 
@@ -12,6 +14,8 @@ import java.util.stream.Collectors;
 
 public class CountingRatingCalculatorWithLimit implements RatingCalculator {
 
+	private static final Logger log = LoggerFactory.getLogger(CountingRatingCalculatorWithLimit.class);
+
 	private static final BigDecimal ONE_HUNDRED = BigDecimal.valueOf(100);
 
 	private final int resultsLimit;
@@ -22,6 +26,8 @@ public class CountingRatingCalculatorWithLimit implements RatingCalculator {
 
 	@Override
 	public List<Rating> getBestRatings(Set<String> wordsToFind, Set<FileWordsContainer> fileWordsContainers) {
+		log.debug("Calculating rating. Words to find: {}, fileWordsContainer: {}", wordsToFind, fileWordsContainers);
+
 		return fileWordsContainers.stream()
 				.map(fileWorldsContainer -> calcRating(fileWorldsContainer, wordsToFind))
 				.sorted(Comparator.reverseOrder())
@@ -44,6 +50,7 @@ public class CountingRatingCalculatorWithLimit implements RatingCalculator {
 
 	private BigDecimal calcPercentage(int worldsToFindNumber, long occurred) {
 		if (worldsToFindNumber == 0) {
+			log.debug("No words to find, returning rating 100%");
 			return ONE_HUNDRED;
 		}
 

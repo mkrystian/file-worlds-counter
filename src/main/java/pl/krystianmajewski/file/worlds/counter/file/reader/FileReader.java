@@ -24,6 +24,7 @@ public class FileReader {
 
 	public FileWordsContainer readFile(File file) {
 		try {
+			log.debug("Reading file: {}", file);
 			return new FileWordsContainer(Filename.fromFile(file), Files.lines(file.toPath())
 					.map(lineParser::parseLine)
 					.flatMap(Collection::stream)
