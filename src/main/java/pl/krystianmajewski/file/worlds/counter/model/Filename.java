@@ -1,14 +1,11 @@
 package pl.krystianmajewski.file.worlds.counter.model;
 
 import java.io.File;
+import java.util.Objects;
 
-/**
- * @author Krystian Majewski
- * @since 11.03.2019.
- */
 public class Filename {
 
-	public static Filename fromFile(File file){
+	public static Filename fromFile(File file) {
 		return new Filename(file.getName());
 	}
 
@@ -20,6 +17,19 @@ public class Filename {
 
 	@Override
 	public String toString() {
-		return String.format("filename %s", filename);
+		return filename;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Filename filename1 = (Filename) o;
+		return Objects.equals(filename, filename1.filename);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(filename);
 	}
 }

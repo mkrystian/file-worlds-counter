@@ -3,10 +3,6 @@ package pl.krystianmajewski.file.worlds.counter.file.reader
 import spock.lang.Specification
 import spock.lang.Unroll
 
-/**
- * @author Krystian Majewski
- * @since 11.03.2019.
- */
 @Unroll
 class FilesInDirectoryTest extends Specification {
 

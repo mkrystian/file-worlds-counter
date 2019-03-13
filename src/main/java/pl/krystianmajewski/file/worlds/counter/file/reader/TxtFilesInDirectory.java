@@ -20,8 +20,8 @@ public class TxtFilesInDirectory implements FilesInDirectory {
 
 	@Override
 	public Set<File> getFiles(File directory) {
-		log.debug("Reading files from directory: ", directory);
 		checkPreConditions(directory);
+		log.debug("Reading files from directory: {}", directory.getAbsolutePath());
 
 		return Arrays.stream(directory.listFiles(FILENAME_FILTER))
 				.filter(File::isFile)

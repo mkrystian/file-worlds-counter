@@ -5,18 +5,21 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/**
- * @author Krystian Majewski
- * @since 11.03.2019.
- */
+import static java.util.Collections.emptySet;
+import static java.util.Objects.isNull;
+
 public class LineParserWithNormalization implements LineParser {
 
 	private static final Pattern nonNormalizedPattern = Pattern.compile("[^a-z]");
 
 	@Override
 	public Set<String> parseLine(String line) {
+		if (isNull(line)) {
+			return emptySet();
+		}
 		return Arrays.stream(line.split(" "))
 				.map(this::normalizeWord)
+				.filter(word -> word.length() > 0)
 				.collect(Collectors.toSet());
 	}
 
